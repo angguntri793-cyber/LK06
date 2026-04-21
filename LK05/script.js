@@ -54,6 +54,7 @@ form.addEventListener("submit", function (e) {
     //reset form
     form.reset();
 });
+
 // ==========================================
 // TO DO LIST LOGIC
 // ==========================================
@@ -62,7 +63,7 @@ const addTaskBtn = document.getElementById("addTaskBtn");
 const taskList = document.getElementById("taskList");
 
 // Tambahkan tugas baru
-addTaskBtn.addEventListener("click", function () {
+addTaskBtn.addEventListener("click", function() {
     const taskText = taskInput.value.trim();
     if (taskText === "") {
         alert("Tugas tidak boleh kosong!");
@@ -70,56 +71,57 @@ addTaskBtn.addEventListener("click", function () {
     }
 
     const li = document.createElement("li");
-
+    
     // Teks tugas
     const span = document.createElement("span");
     span.textContent = taskText;
     span.className = "task-text";
-
+    
     // Toggle status selesai jika teks diklik
-    span.addEventListener("click", function () {
+    span.addEventListener("click", function() {
         li.classList.toggle("completed");
     });
-
+    
     // Tombol hapus
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Hapus";
     deleteBtn.className = "btn-delete";
-    deleteBtn.addEventListener("click", function () {
+    deleteBtn.addEventListener("click", function() {
         li.remove();
     });
 
     li.appendChild(span);
     li.appendChild(deleteBtn);
-
+    
     taskList.appendChild(li);
-
+    
     // Reset input
     taskInput.value = "";
 });
 
 // Menambahkan tugas dengan menekan tombol Enter
-taskInput.addEventListener("keypress", function (e) {
+taskInput.addEventListener("keypress", function(e) {
     if (e.key === "Enter") {
         addTaskBtn.click();
     }
 });
 
 // ==========================================
-// THEME SWITCHER LOGIC
+// THEME SWITCHER LOGIC (MULTI THEME)
 // ==========================================
 const themeButtons = document.querySelectorAll(".theme-circle");
 
 themeButtons.forEach(btn => {
-    btn.addEventListener("click", function () {
+    btn.addEventListener("click", function() {
         // Hapus semua tema yang sudah dipasang
         document.body.classList.remove("light-theme", "ocean-theme", "forest-theme", "fiery-theme");
-
+        
         // Ambil nama tema dari atribut data-theme
         const selectedTheme = btn.getAttribute("data-theme");
-
+        
         // Tambahkan tema baru jika bukan tema default (original)
         if (selectedTheme !== "default-theme") {
             document.body.classList.add(selectedTheme);
         }
     });
+});
